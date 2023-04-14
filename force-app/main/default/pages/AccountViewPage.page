@@ -20,6 +20,8 @@
                         <apex:column value="{! acc.rating }" />
                     </apex:pageBlockTable>
                 </apex:outputPanel>
+                <apex:commandLink action="{!previous}">Previous</apex:commandLink>
+                <apex:commandLink action="{!next}">Next</apex:commandLink>
             </apex:form>
     </apex:pageBlockSection>
 </apex:pageBlock>
