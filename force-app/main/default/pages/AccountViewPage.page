@@ -1,3 +1,18 @@
-<apex:page>
-
+<apex:page standardController="Account" recordSetVar="accounts">
+<header>
+    <nav>
+    <ul>
+        <li><apex:outputLink value="AccountViewPage">View Accounts</apex:outputLink></li>
+        <li>Create Account</li>
+    </ul>
+    </nav>
+</header>
+<apex:pageBlock>
+    <apex:pageBlockSection>
+        <apex:pageBlockTable value="{! accounts }" var="acc">
+            <apex:column value="{! acc.name }"/>
+            <apex:column value="{! acc.rating }" />
+        </apex:pageBlockTable>
+    </apex:pageBlockSection>
+</apex:pageBlock>
 </apex:page>
