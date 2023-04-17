@@ -28,7 +28,7 @@
         <!-- Contacts List -->
         <apex:pageBlockTable value="{!contacts}" var="ct">
           <apex:column width="70">
-            <apex:outputLink style="color:red" value="/apex/tb">
+            <apex:outputLink style="color:red" value="/apex/ContactPage">
               Edit <apex:param name="id" value="{!ct.Id}"/>
             </apex:outputLink>
             |&nbsp;
