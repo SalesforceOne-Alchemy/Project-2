@@ -1,0 +1,76 @@
+<!--========================================================================-->
+<!-- Name: CHRISTOPHER BOAMAH MENSAH 
+           Revature LLC                                                     -->
+
+<!-- Purpose: This page displays a list of contact records. There is 
+              functionality for creating, updating, and deleting records.   -->
+<!--========================================================================-->
+<apex:page standardController="Contact" recordSetVar="contacts" extensions="ContactControllerExt">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Contacts List</title>
+  </head>
+
+  <body>
+    <apex:image url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}" width="100%"/>
+    
+    <apex:pageMessages/>
+
+    <apex:form>
+      <apex:pageBlock title="Contact List" id="contactList">
+        Filter:
+        <apex:selectList value="{!filterId}" size="1">
+          <apex:selectOptions value="{!listViewOptions}"/>
+          <apex:actionSupport event="onchange" reRender="contactList"/>
+        </apex:selectList>
+
+        <!-- Contacts List -->
+        <apex:pageBlockTable value="{!contacts}" var="ct">
+          <apex:column width="70">
+            <apex:outputLink style="color:red" value="/apex/tb">
+              Edit <apex:param name="id" value="{!ct.Id}"/>
+            </apex:outputLink>
+            |&nbsp;
+            <apex:outputLink style="color:red" value="{!URLFOR($Action.Contact.Delete, ct.Id, [retURL='/apex/ContactListPage'])}">
+              Del
+            </apex:outputLink>
+            &nbsp;
+          </apex:column>
+          <apex:column value="{!ct.FirstName}"/>
+          <apex:column value="{!ct.LastName}"/>
+          <apex:column value="{!ct.Title}"/>
+        </apex:pageBlockTable>
+
+        <div style="display:flex; flex-direction:row; justify-content:space-between">
+          <div></div>
+          <div>
+            <apex:commandButton action="{!Previous}" value="Previous" rendered="{!HasPrevious}"/>
+            <!-- inactive (no earlier pages) -->
+            <apex:outputText style="color:#ccc;" value="Previous" rendered="{!NOT(HasPrevious)}"/> 
+            &nbsp;&nbsp;
+            <!-- active -->
+            <apex:commandButton action="{!Next}" value="Next" rendered="{!HasNext}"/>
+            <!-- inactive (no more pages) -->
+            <apex:outputText style="color:#ccc;" value="Next" rendered="{!NOT(HasNext)}" />
+          </div>
+          <div>
+            Records per page:
+            <apex:selectList value="{!PageSize}" size="1">
+              <apex:selectOption itemValue="5" itemLabel="5"/>
+              <apex:selectOption itemValue="10" itemLabel="10"/>
+              <apex:selectOption itemValue="20" itemLabel="20"/>
+              <apex:actionSupport event="onchange" reRender="contactList"/>
+            </apex:selectList>
+          </div>
+        </div>
+      </apex:pageBlock>
+    </apex:form>
+
+    <div style="display:flex; justify-content:center; margin:10px; padding:30px">
+      <apex:outputLink style="color:blue" value="/apex/ContactPage">
+        Create New Contact
+      </apex:outputLink>
+    </div>
+  </body>
+</apex:page>

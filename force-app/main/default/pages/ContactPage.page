@@ -1,0 +1,38 @@
+<!--========================================================================-->
+<!-- Name: CHRISTOPHER BOAMAH MENSAH 
+           Revature LLC                                                     -->
+
+<!-- Purpose: This page displays fields for creating and updating a contact
+              record.                                                       -->
+<!--========================================================================-->
+<apex:page standardController="Contact" extensions="ContactControllerExt">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Contact Page</title>
+    <!-- Import the Design System style sheet -->
+    <apex:slds/>
+  </head>  
+
+  <body>
+    <apex:image url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}"/>
+
+    <apex:sectionHeader title="Contact Page"/>
+
+    <apex:pageMessages/>
+
+    <apex:form>
+      <apex:pageBlock title="Create a New Contact">
+        <apex:pageBlockSection title="Contact Info">
+          <apex:inputField value="{!cont.firstName}"/>
+          <apex:inputField value="{!cont.lastName}"/>
+          <apex:inputField value="{!cont.title}"/>
+        </apex:pageBlockSection>
+
+        <apex:pageBlockButtons location="bottom">
+          <apex:commandButton action="{!saveOrEditRecord}" value="Save"/>
+        </apex:pageBlockButtons>
+      </apex:pageBlock>
+    </apex:form>
+  </body>
+</apex:page>
