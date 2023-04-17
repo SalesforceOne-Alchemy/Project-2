@@ -1,0 +1,85 @@
+<apex:page standardController="Order" extensions="OrderVFPDetailExtender">    
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Orders</title>
+<!-- Import the Design image -->
+        <apex:slds />
+        <apex:image url="https://resourceful-unicorn-tcoamw-dev-ed--c.trailblaze.vf.force.com/resource/1681341849000/banner2?" styleclass = "imageStyle"/>
+    </head>
+    <body>
+        
+        <apex:form id="mainform">
+          <apex:pageMessages />
+            <apex:pageBlock title="Orders">
+<!--Buttons -->
+               <apex:pageBlockButtons location="Bottom">
+                <apex:outputLink value="Apex/OrderVFPMain">Back</apex:outputLink>
+                  <apex:commandButton action="{!deleteNew}" value="Delete"/>
+                  <apex:commandButton action="{!saveList}" value="Save"/>
+                  
+               </apex:pageBlockButtons>
+<!--Detail -->
+               <apex:pageBlockSection columns="2">
+               <apex:outputField value="{!order.ordernumber}"/>
+               <apex:outputField value="{!order.TotalAmount}"/>
+               <apex:inputField value="{!order.AccountId}"/>
+               <apex:inputField value="{!order.ContractId}"/>
+               <apex:inputField value="{!order.Pricebook2Id}"/>
+               <apex:inputField value="{!order.EffectiveDate}"/>
+               <apex:inputField value="{!order.enddate}"/>
+               <apex:inputField value="{!order.Status}"/>
+              </apex:pageBlockSection>
+            </apex:pageBlock>
+<!-- Product List -->
+            <apex:outputPanel id="prolist">  
+            <apex:pageBlock title="Product List"> 
+            <apex:pageBlockTable value="{!Order.orderitems}" var="Product" id="list_table" styleClass="list">
+              <apex:column >
+                <apex:outputLink value="{!URLFOR($Action.OrderItem.Edit, Product.id)}">Edit</apex:outputLink>&nbsp;|&nbsp;
+                <apex:commandLink value="Del"  action="{!deleteRecord}">
+                <apex:param value="{!Product.id}" name="deleteRec" assignTo="{!delId }"/>
+                </apex:commandLink>
+          </apex:column>
+              <apex:column value="{!Product.Product2.Name}"/>
+                <apex:column headerValue="Quantity"> 
+                  <apex:outputField value="{!Product.Quantity}">
+                  <apex:inlineEditSupport event="onClick"/>
+                  </apex:outputField>
+                  <apex:facet name ="header">Qty</apex:facet>
+              </apex:column>
+              <apex:column headerValue="Unti Price"> 
+                <apex:outputField value="{!Product.UnitPrice}">
+                <apex:inlineEditSupport event="onClick" showOnEdit="qsave"/>
+                <apex:facet name ="header">Unit Price</apex:facet>
+                </apex:outputField>
+            </apex:column>
+                <apex:column value="{!Product.ListPrice}"/>
+                <apex:column value="{!Product.TotalPrice}"/>
+              </apex:pageBlockTable>
+            </apex:pageBlock>
+            </apex:outputPanel>
+        
+<!-- add Product -->
+          <apex:commandButton action="{!makeAddProduct}" value="Add Product" id="makeaddproduct"/>  
+            <apex:outputText style="font-weight: bold " value="Click in the below list and select a Product then enter a Quantity"  rendered='{!ShowAddProduct}'/>
+        <apex:pageBlock > 
+          <apex:pageBlockTable value="{!ordItem}" var="addPro" id="list2_table" styleClass="list"  rendered='{!ShowAddProduct}'> 
+          <apex:column>
+                <apex:outputField value="{!addPro.Product2Id}"/>
+                <apex:facet name ="header">Product</apex:facet>
+                <apex:param value="{!addPro.Product2Id}" name="addPro" assignTo="{!addProId }"/>
+            </apex:column>
+            <apex:column>
+              <apex:outputField value="{!addPro.Quantity}"/>
+              <apex:facet name ="header">Quantity</apex:facet>
+          </apex:column>
+              <apex:inlineEditSupport event="onClick" showOnEdit="addnewpro"/>            
+      </apex:pageBlockTable>
+      <apex:outputLabel value="{!addProId }"/>
+      <apex:commandButton action="{!addOrderItem}" value="Insert Product" style="display:none" id="addnewpro"/> 
+      <apex:actionSupport event="onclick" reRender="list_table" />
+       </apex:pageBlock> 
+            </apex:form>
+    </body>
+</apex:page>

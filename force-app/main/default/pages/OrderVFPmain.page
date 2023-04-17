@@ -1,0 +1,56 @@
+<apex:page standardController="Order" recordSetVar="Orders" 
+              tabStyle="Order"
+    extensions="OrderVFPmainExtend" sidebar="false">
+    
+     
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contacts</title>
+    <apex:stylesheet value="{!$Resource.VFStylesheet}" />
+    <apex:slds />
+    <apex:image url="https://resourceful-unicorn-tcoamw-dev-ed--c.trailblaze.vf.force.com/resource/1681341849000/banner2?" styleclass = "imageStyle"/>
+    <apex:form styleClass = "myFormStyle">
+        <apex:pageBlock title="Order List"> 
+            <apex:pageMessages />
+         
+                <apex:panelGrid columns="2">
+                    
+                    <apex:outputLabel value="View:"/>
+                    <apex:selectList value="{!filterId}" size="1">
+                        <apex:actionSupport event="onchange" rerender="list_table"/>
+                        <apex:selectOptions value="{!listviewoptions}"/>
+                    </apex:selectList>
+                </apex:panelGrid>
+            
+            <apex:pageBlockTable value="{!orders}" var="order" id="list_table" styleClass="list">
+                <apex:column headerValue="Order Number"> 
+                    <apex:outputLink value="Apex/OrderVFPDetail?id={!order.id}">{!order.OrderNumber}</apex:outputLink>
+            </apex:column>
+                <apex:column value="{!order.AccountId}"/>
+                <apex:column value="{!order.TotalAmount}"/>
+                <apex:column value="{!order.EffectiveDate}"/>
+                <apex:column value="{!order.enddate}"/>
+                <apex:column value="{!order.ContractId}"/>
+                <apex:column value="{!order.Status}"/>
+            </apex:pageBlockTable>
+                <apex:pageBlockButtons location="Bottom">
+                    <apex:commandLink value="First" action="{!First}"/> &nbsp;
+                    <apex:commandLink value="Next" action="{!Next}"/> &nbsp;
+                    <apex:commandLink value="Previous" action="{!Previous}"/> &nbsp;
+                    <apex:commandLink value="Last" action="{!Last}"/>
+                </apex:pageBlockButtons> 
+                <apex:panelGrid>
+                <apex:outputPanel>
+                <apex:outputText value="Records per page: "/>
+                <apex:selectList value="{!PageSize}" size="1">
+                <apex:selectOption itemValue="{!10}" itemLabel="10"/>
+                <apex:selectOption itemValue="{!20}" itemLabel="20"/>
+                </apex:selectList>
+                <apex:commandButton action="{!NULL}" value="Update"/>
+                <apex:outputLink value="Apex/OrderVFPDetail"> Add a new Order</apex:outputLink>
+                </apex:outputPanel>
+                </apex:panelGrid>
+        </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>
