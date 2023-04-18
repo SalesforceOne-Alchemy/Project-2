@@ -1,4 +1,4 @@
-<apex:page standardController="Account" recordSetVar="accounts">
+<apex:page standardController="Account" recordSetVar="accounts" extensions="AccountExtention">
 <header>
     <nav>
         <ul>
@@ -11,7 +11,7 @@
     <apex:pageBlockSection>
             <apex:form>
                 <apex:selectList value="{!filterId}" size="1">
-                    <apex:actionSupport event="onchange" rerender="list-view"/>
+                    <apex:actionSupport event="onchange" reRender="list-view"/>
                     <apex:selectOptions value="{!listviewoptions}"/>
                 </apex:selectList>
                 <apex:outputPanel id="list-view">
@@ -19,6 +19,11 @@
                         <apex:column headerValue="Actions">
                             <apex:outputLink value="AccountCreateEditPage">edit
                                 <apex:param name="id" value="{!acc.Id}"/>
+                            </apex:outputLink>
+                            <apex:outputLink>
+                                <apex:commandLink action="{!deleteAccount}" reRender="list-view" value="Del">
+                                    <apex:param name="recordId" value="{!acc.Id}" assignTo="{!recordId}"/>
+                                </apex:commandLink>
                             </apex:outputLink>
                         </apex:column>
                         <apex:column value="{! acc.name }"/>
