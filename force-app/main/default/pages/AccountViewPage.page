@@ -7,7 +7,7 @@
         </ul>
     </nav>
 </header>
-<apex:pageBlock>
+<apex:pageBlock title="Accounts">
     <apex:pageBlockSection>
             <apex:form>
                 <apex:selectList value="{!filterId}" size="1">
