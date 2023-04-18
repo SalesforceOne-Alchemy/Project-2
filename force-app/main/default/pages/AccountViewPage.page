@@ -16,6 +16,11 @@
                 </apex:selectList>
                 <apex:outputPanel id="list-view">
                     <apex:pageBlockTable value="{! accounts }" var="acc">
+                        <apex:column headerValue="Actions">
+                            <apex:outputLink value="AccountCreateEditPage">edit
+                                <apex:param name="id" value="{!acc.Id}"/>
+                            </apex:outputLink>
+                        </apex:column>
                         <apex:column value="{! acc.name }"/>
                         <apex:column value="{! acc.rating }" />
                     </apex:pageBlockTable>
