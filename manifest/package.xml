@@ -5,5 +5,9 @@
         <members>AccountViewPage</members>
         <name>ApexPage</name>
     </types>
+    <types>
+        <members>AccountExtension</members>
+        <name>ApexClass</name>
+    </types>
     <version>56.0</version>
 </Package>
