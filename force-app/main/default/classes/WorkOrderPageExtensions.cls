@@ -7,7 +7,18 @@ public with sharing class WorkOrderPageExtensions {
     String recordId = ApexPages.currentPage().getParameters().get('id');
     if (recordId != null) {
       this.worko = [
-        SELECT Id, WorkOrderNumber, Status, Priority, AccountId, ContactId, AssetId, CaseId, EntitlementId, Subject, Description
+        SELECT
+          Id,
+          WorkOrderNumber,
+          Status,
+          Priority,
+          AccountId,
+          ContactId,
+          AssetId,
+          CaseId,
+          EntitlementId,
+          Subject,
+          Description
         FROM WorkOrder
         WHERE Id = :recordId
       ];

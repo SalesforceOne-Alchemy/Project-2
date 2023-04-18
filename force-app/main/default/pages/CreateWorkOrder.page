@@ -8,11 +8,11 @@
                 <apex:inputField value="{!worko.Priority}" />
                 <apex:inputField value="{!worko.AccountId}" />
                 <apex:inputField value="{!worko.ContactId}" />
-                <apex:inputField value="{!worko.AssetId}"/>
+                <apex:inputField value="{!worko.AssetId}" />
                 <apex:inputField value="{!worko.CaseId}" />
                 <apex:inputField value="{!worko.EntitlementId}" />
                 <apex:inputField value="{!worko.Subject}" />
-                <apex:inputField value="{!worko.Description}"/>
+                <apex:inputField value="{!worko.Description}" />
 
             </apex:pageBlockSection>
             <apex:pageBlockButtons>
