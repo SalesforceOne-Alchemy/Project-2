@@ -18,7 +18,7 @@
         <name>ApexTestSuite</name>
     </types>
     <types>
-        <members></members>
+        <members>ContactTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>
