@@ -12,6 +12,7 @@
         <members>AccountCustomController</members>
         <members>LeadExtension</members>
         <members>LeadCustomController</members>
+        <members>AccountCustomControllerTest</members>
         <name>ApexClass</name>
     </types>
     <types>
