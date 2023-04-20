@@ -56,13 +56,13 @@
                 </apex:pageBlockTable>
 
                 <!-- Pagination -->
-                <apex:panelGrid columns="3" styleClass="paginationTable">
+                <apex:panelGrid columns="3" style="width: 100%;">
                     <apex:panelGroup layout="block">
                         <!-- Page X of Y -->
                         <apex:outputText value="Page: " />
                         <apex:outputText value="{!PageNumber} of {! CEILING(ResultSize / PageSize)}" />
                     </apex:panelGroup>
-                    <apex:panelGroup layout="block" styleClass="centerTable">
+                    <apex:panelGroup layout="block" style="text-align: center;">
                         <!-- Previous page -->
                         <!--active-->
                         <apex:commandLink action="{!Previous}" value="Previous" rendered="{!HasPrevious}" />
@@ -74,7 +74,7 @@
                         <!-- inactive (no more pages) -->
                         <apex:outputText styleClass="paginationText" value="Next »" rendered="{! NOT(HasNext) }" />
                     </apex:panelGroup>
-                    <apex:panelGroup layout="block" styleClass="rightTable">
+                    <apex:panelGroup layout="block" style="text-align:right;">
                         <!-- Records per page -->
                         <apex:outputText value="Records per Page: " />
                         <apex:selectList value="{! PageSize }" size="1">
