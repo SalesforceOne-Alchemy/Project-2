@@ -25,6 +25,7 @@
         <name>LightningComponentBundle</name>
     </types>
     <types>
+        <members>visualforceStyle</members>
         <name>StaticResource</name>
     </types>
     <version>56.0</version>

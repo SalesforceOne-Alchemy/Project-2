@@ -1,13 +1,13 @@
 <apex:page standardController="WorkOrder" recordSetVar="wOrders" tabStyle="WorkOrder" sidebar="false" extensions="WorkOrderPageExtensions">
     <header>
         <apex:stylesheet value="{!$Resource.visualforceStyle}" />
-        <apex:slds/>
+        <apex:slds />
     </header>
     <apex:image styleClass="bannerImg" url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}" />
     <apex:outputPanel id="refreshDisplay">
-        <apex:form>
+        <apex:form >
             <apex:pageMessages rendered="refreshDisplay"></apex:pageMessages>
-            <apex:pageBlock>
+            <apex:pageBlock >
                 <!-- Icon, Title, List View Options and Create Button-->
                 <div id="container">
                     <div id="selectionStyle">
@@ -27,7 +27,7 @@
                 <apex:pageBlockTable value="{!wOrders}" var="worko" id="refreshTable" styleClass="list">
                     <!-- Del Link, Edit Link -->
                     <apex:column headerValue="Actions">
-                        <apex:outputLink>
+                        <apex:outputLink >
                             <apex:outputLink styleClass="recordlist" value="/apex/c__CreateWorkOrder">
                                 <apex:outputText value="Edit" />
                                 <apex:param name="id" value="{!worko.Id}" />

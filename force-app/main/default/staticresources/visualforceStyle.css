@@ -1,0 +1,56 @@
+ #selectionStyle {
+    display: flex;
+    flex-direction: column;
+ }
+ #container {
+    display: flex;
+    align-items: flex-start;
+ }
+ #h1text {
+    margin: 10px 0px 3px 4px;
+    font-size: 1rem;
+ }
+.stlyeSheet {
+    margin-bottom: 10px;
+}
+#rightButton{
+    display: flex;
+    justify-content: right;
+    flex-grow: 3;
+}
+.createButton{
+    line-height: 1.5rem;
+    width: 2.5rem;
+}
+.delEditButtons{
+   padding: 0px 5px 0px 5px;
+}
+.paginationText{
+   color: #ccc;
+}
+#paginationTable{
+   width: 100%;
+}
+#centerTable {
+   text-align: center;
+}
+#rightTable {
+   text-align: right;
+}
+.bannerImg{
+width: 100%;            
+}
+.recordlist:link{
+    text-decoration: none;
+	color: rgb(1, 118, 211);
+}
+.recordlist:visited {
+	text-decoration: none;
+}
+.recordlist:hover{
+	text-decoration: none;
+    color: rgb(1, 68, 134);
+}
+.recordlist:active{
+	text-decoration: none;
+}
