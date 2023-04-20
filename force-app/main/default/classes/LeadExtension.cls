@@ -1,8 +1,10 @@
 public with sharing class LeadExtension {
     public Lead ld {get; set;}
     public Id recordId {get; set;}
+    public ApexPages.StandardSetController stdSetController;
 
     public LeadExtension(ApexPages.StandardSetController stdSetController) {
+        this.stdSetController = stdSetController;
         if(recordId != null){
             this.ld = (Lead) stdSetController.getRecord();
         }
@@ -29,4 +31,24 @@ public with sharing class LeadExtension {
         }
     }
 
+    public Integer getPageNubmer(){
+        return stdSetController.getPageNumber();
+    }
+
+    public Integer getTotalPages(){
+        Decimal totalRecords = stdSetController.getResultSize();
+        return (Integer) Math.ceil (totalRecords / stdSetController.getPageSize());
+    }
+
+    public PageReference newLead(){
+        try{
+            PageReference pr = Page.LeadCreateEditPage;
+            pr.setRedirect(true);
+            return pr;
+        }
+        catch(Exception e){
+            ApexPages.addMessages(e);
+            return null;
+        }
+    }
 }

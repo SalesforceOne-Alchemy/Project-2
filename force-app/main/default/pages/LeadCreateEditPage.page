@@ -1,12 +1,6 @@
 <apex:page controller="LeadCustomController">
-    <header>
-        <nav>
-            <ul>
-                <li><apex:outputLink value="LeadViewPage">View Accounts</apex:outputLink></li>
-                <li><apex:outputLink value="LeadCreateEditPage">Create Account</apex:outputLink></li>
-            </ul>
-        </nav>
-    </header>
+    <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
+    <apex:slds/>
     <apex:form >
         <apex:pageMessages />
         <apex:pageBlock >
