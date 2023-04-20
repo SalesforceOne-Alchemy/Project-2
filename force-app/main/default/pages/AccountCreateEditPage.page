@@ -12,6 +12,9 @@
         <apex:pageBlock >
             <apex:pageBlockSection>
                 <apex:inputField value="{!account.name}"/>
+                <apex:inputField value="{!account.Rating}"/>
+                <apex:inputField value="{!account.Phone}"/>
+                <apex:inputField value="{!account.ParentId}"/>
                 <apex:commandLink action="{!save}" value="Save">
                 </apex:commandLink>
             </apex:pageBlockSection>

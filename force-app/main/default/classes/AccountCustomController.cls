@@ -3,7 +3,7 @@ public with sharing class AccountCustomController {
     private final Account account;
     public AccountCustomController() {
         if(ApexPages.currentPage().getParameters().get('id') != null){
-            account = [SELECT Id, Name FROM Account WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
+            account = [SELECT Id, Name, Rating, Phone, ParentId FROM Account WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
         }
         else{
             account = new Account();
@@ -15,7 +15,13 @@ public with sharing class AccountCustomController {
     }
 
     public PageReference save(){
-        upsert account;
-        return Page.AccountViewPage;
+        try{
+            upsert account;
+            return Page.AccountViewPage;
+        }
+        catch(Exception e){
+            ApexPages.addMessages(e);
+            return null;
+        }
     }
 }

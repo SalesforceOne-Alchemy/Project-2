@@ -26,8 +26,10 @@
                                 </apex:commandLink>
                             </apex:outputLink>
                         </apex:column>
-                        <apex:column value="{! acc.name }"/>
-                        <apex:column value="{! acc.rating }" />
+                        <apex:column value="{! acc.Name }"/>
+                        <apex:column value="{! acc.Rating }"/>
+                        <apex:column value="{! acc.Phone }"/>
+                        <apex:column value="{! acc.ParentId }"/>
                     </apex:pageBlockTable>
                 </apex:outputPanel>
                 <apex:commandLink action="{!previous}">Previous</apex:commandLink>
