@@ -14,5 +14,9 @@
         <members>LeadCustomController</members>
         <name>ApexClass</name>
     </types>
+    <types>
+        <members>visualforceStyle</members>
+        <name>StaticResource</name>
+    </types>
     <version>56.0</version>
 </Package>

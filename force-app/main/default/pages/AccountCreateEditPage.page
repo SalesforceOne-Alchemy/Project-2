@@ -8,9 +8,9 @@
         </nav>
     </header>
     <apex:form >
-        <apex:pageMessages/>
+        <apex:pageMessages />
         <apex:pageBlock >
-            <apex:pageBlockSection>
+            <apex:pageBlockSection >
                 <apex:inputField value="{!account.name}"/>
                 <apex:inputField value="{!account.Rating}"/>
                 <apex:inputField value="{!account.Phone}"/>

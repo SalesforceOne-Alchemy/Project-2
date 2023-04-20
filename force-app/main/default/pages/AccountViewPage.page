@@ -1,40 +1,48 @@
 <apex:page standardController="Account" recordSetVar="accounts" extensions="AccountExtension">
-<header>
-    <nav>
-        <ul>
-            <li><apex:outputLink value="AccountViewPage">View Accounts</apex:outputLink></li>
-            <li><apex:outputLink value="AccountCreateEditPage">Create Account</apex:outputLink></li>
-        </ul>
-    </nav>
-</header>
-<apex:pageBlock title="Accounts">
-    <apex:pageBlockSection>
-            <apex:form>
-                <apex:selectList value="{!filterId}" size="1">
-                    <apex:actionSupport event="onchange" reRender="list-view"/>
-                    <apex:selectOptions value="{!listviewoptions}"/>
-                </apex:selectList>
-                <apex:outputPanel id="list-view">
-                    <apex:pageBlockTable value="{! accounts }" var="acc">
-                        <apex:column headerValue="Actions">
-                            <apex:outputLink value="AccountCreateEditPage">edit
-                                <apex:param name="id" value="{!acc.Id}"/>
-                            </apex:outputLink>
-                            <apex:outputLink>
-                                <apex:commandLink action="{!deleteAccount}" reRender="list-view" value="Del">
-                                    <apex:param name="recordId" value="{!acc.Id}" assignTo="{!recordId}"/>
-                                </apex:commandLink>
-                            </apex:outputLink>
-                        </apex:column>
-                        <apex:column value="{! acc.Name }"/>
-                        <apex:column value="{! acc.Rating }"/>
-                        <apex:column value="{! acc.Phone }"/>
-                        <apex:column value="{! acc.ParentId }"/>
-                    </apex:pageBlockTable>
-                </apex:outputPanel>
-                <apex:commandLink action="{!previous}">Previous</apex:commandLink>
-                <apex:commandLink action="{!next}">Next</apex:commandLink>
-            </apex:form>
-    </apex:pageBlockSection>
-</apex:pageBlock>
+    <apex:stylesheet value="{$Resource.visualforceStyle}"/>
+    <header>
+        <nav>
+            <ul>
+                <li><apex:outputLink value="AccountViewPage">View Accounts</apex:outputLink></li>
+                <li><apex:outputLink value="AccountCreateEditPage">Create Account</apex:outputLink></li>
+            </ul>
+        </nav>
+    </header>
+    <apex:pageBlock title="Accounts">
+        <apex:pageBlockSection >
+                <apex:form >
+                    <apex:selectList value="{!filterId}" size="1">
+                        <apex:actionSupport event="onchange" reRender="list-view"/>
+                        <apex:selectOptions value="{!listviewoptions}"/>
+                    </apex:selectList>
+                    <apex:outputPanel id="list-view">
+                        <apex:pageBlockTable value="{! accounts }" var="acc">
+                            <apex:column headerValue="Actions">
+                                <apex:outputLink value="AccountCreateEditPage" styleClass="edit-button">Edit
+                                    <apex:param name="id" value="{!acc.Id}"/>
+                                </apex:outputLink>
+                                <apex:outputLink >
+                                    <apex:commandLink action="{!deleteAccount}" reRender="list-view" value="Del">
+                                        <apex:param name="recordId" value="{!acc.Id}" assignTo="{!recordId}"/>
+                                    </apex:commandLink>
+                                </apex:outputLink>
+                            </apex:column>
+                            <apex:column value="{! acc.Name }"/>
+                            <apex:column value="{! acc.Rating }"/>
+                            <apex:column value="{! acc.Phone }"/>
+                            <apex:column value="{! acc.ParentId }"/>
+                        </apex:pageBlockTable>
+                    </apex:outputPanel>
+                    <apex:outputText value="Page {!pageNumber} of {!totalPages}"/>
+                    <apex:commandLink action="{!previous}">Previous</apex:commandLink>
+                    <apex:commandLink action="{!next}">Next</apex:commandLink>
+                    <apex:selectList value="{!pageSize}" size="1">
+                        <apex:actionSupport event="onchange" reRender="list-view"/>
+                        <apex:selectOption itemLabel="5" itemValue="5"/>
+                        <apex:selectOption itemLabel="10" itemValue="10"/>
+                        <apex:selectOption itemLabel="20" itemValue="20"/>
+                    </apex:selectList>
+                </apex:form>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
 </apex:page>

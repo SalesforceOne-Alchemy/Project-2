@@ -1,47 +1,47 @@
 <apex:page standardController="Lead" recordSetVar="leads" extensions="LeadExtension">
-<header>
-    <nav>
-        <ul>
-            <li><apex:outputLink value="Lead">View Lead</apex:outputLink></li>
-            <li><apex:outputLink value="LeadCreateEditPage">Create Lead</apex:outputLink></li>
-        </ul>
-    </nav>
-</header>
-<apex:pageBlock title="Leads">
-    <apex:pageBlockSection>
-            <apex:form>
-                <apex:selectList value="{!filterId}" size="1">
-                    <apex:actionSupport event="onchange" reRender="list-view"/>
-                    <apex:selectOptions value="{!listviewoptions}"/>
-                </apex:selectList>
-                <apex:outputPanel id="list-view">
-                    <apex:pageBlockTable value="{! leads }" var="ld">
-                        <apex:column headerValue="Actions">
-                            <apex:outputLink value="LeadCreateEditPage">edit
-                                <apex:param name="id" value="{!ld.Id}"/>
-                            </apex:outputLink>
-                            <apex:outputLink>
-                                <apex:commandLink action="{!deleteLead}" reRender="list-view" value="Del">
-                                    <apex:param name="recordId" value="{!ld.Id}" assignTo="{!recordId}"/>
-                                </apex:commandLink>
-                            </apex:outputLink>
-                        </apex:column>
-                        <!--Required fields
-                            First Name: FirstName
-                            Last Name : LastName
-                            Company : Company
-                            Lead Status : Status
-                            Lead Currency : CurrencyIsoCode
-                        -->
-                        <apex:column value="{! ld.FirstName }"/>
-                        <apex:column value="{! ld.LastName }"/>
-                        <apex:column value="{! ld.Company }"/>
-                        <apex:column value="{! ld.Status }"/>
-                    </apex:pageBlockTable>
-                </apex:outputPanel>
-                <apex:commandLink action="{!previous}">Previous</apex:commandLink>
-                <apex:commandLink action="{!next}">Next</apex:commandLink>
-            </apex:form>
-    </apex:pageBlockSection>
-</apex:pageBlock>
+    <header>
+        <nav>
+            <ul>
+                <li><apex:outputLink value="Lead">View Lead</apex:outputLink></li>
+                <li><apex:outputLink value="LeadCreateEditPage">Create Lead</apex:outputLink></li>
+            </ul>
+        </nav>
+    </header>
+    <apex:pageBlock title="Leads">
+        <apex:pageBlockSection >
+                <apex:form >
+                    <apex:selectList value="{!filterId}" size="1">
+                        <apex:actionSupport event="onchange" reRender="list-view"/>
+                        <apex:selectOptions value="{!listviewoptions}"/>
+                    </apex:selectList>
+                    <apex:outputPanel id="list-view">
+                        <apex:pageBlockTable value="{! leads }" var="ld">
+                            <apex:column headerValue="Actions">
+                                <apex:outputLink value="LeadCreateEditPage" styleClass="edit-button">Edit
+                                    <apex:param name="id" value="{!ld.Id}"/>
+                                </apex:outputLink>
+                                <apex:outputLink >
+                                    <apex:commandLink action="{!deleteLead}" reRender="list-view" value="Del">
+                                        <apex:param name="recordId" value="{!ld.Id}" assignTo="{!recordId}"/>
+                                    </apex:commandLink>
+                                </apex:outputLink>
+                            </apex:column>
+                            <!--Required fields
+                                First Name: FirstName
+                                Last Name : LastName
+                                Company : Company
+                                Lead Status : Status
+                                Lead Currency : CurrencyIsoCode
+                            -->
+                            <apex:column value="{! ld.FirstName }"/>
+                            <apex:column value="{! ld.LastName }"/>
+                            <apex:column value="{! ld.Company }"/>
+                            <apex:column value="{! ld.Status }"/>
+                        </apex:pageBlockTable>
+                    </apex:outputPanel>
+                    <apex:commandLink action="{!previous}">Previous</apex:commandLink>
+                    <apex:commandLink action="{!next}">Next</apex:commandLink>
+                </apex:form>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
 </apex:page>

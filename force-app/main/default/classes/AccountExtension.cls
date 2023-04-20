@@ -1,9 +1,10 @@
 public with sharing class AccountExtension {
     public Account acct {get; set;}
     public Id recordId {get; set;}
-    public String accountName {get; set;}
+    public ApexPages.StandardSetController stdSetController;
 
     public AccountExtension(ApexPages.StandardSetController stdSetController) {
+        this.stdSetController = stdSetController;
         if(recordId != null){
             this.acct = (Account) stdSetController.getRecord();
         }
@@ -28,6 +29,16 @@ public with sharing class AccountExtension {
             ApexPages.addMessages(e);
             return null;
         }
+    }
+
+    // Return the current page of total for paginated lists
+    public Integer getPageNumber(){
+        return stdSetController.getPageNumber();
+    }
+
+    public Integer getTotalPages(){
+        Decimal totalRecords = stdSetController.getResultSize();
+        return (Integer) Math.ceil(totalRecords / stdSetController.getPageSize());
     }
 
 }

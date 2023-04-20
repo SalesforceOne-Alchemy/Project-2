@@ -8,9 +8,9 @@
         </nav>
     </header>
     <apex:form >
-        <apex:pageMessages/>
+        <apex:pageMessages />
         <apex:pageBlock >
-            <apex:pageBlockSection>
+            <apex:pageBlockSection >
                 <apex:inputField value="{!lead.FirstName}"/>
                 <apex:inputField value="{!lead.LastName}"/>
                 <apex:inputField value="{!lead.Company}"/>
