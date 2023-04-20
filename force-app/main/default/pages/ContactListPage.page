@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Contacts List</title>
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
+    <!-- import the design system style sheet -->
+    <apex:slds/>
   </head>
 
   <body>
@@ -36,14 +38,16 @@
         <!-- contacts table -->
         <apex:pageBlockTable value="{!contacts}" var="ct">
           <apex:column width="70" headerValue="Actions">
-            <apex:outputLink style="color:red" value="/apex/ContactPage">
-              Edit <apex:param name="id" value="{!ct.Id}"/>
+            <apex:outputLink>
+              <apex:outputLink value="/apex/ContactPage">
+                <apex:outputText value="Edit"/>
+                <apex:param name="id" value="{!ct.Id}"/>
+              </apex:outputLink>
+              <apex:outputText value=" "/>
+              <apex:commandLink action="{!deleteRecord}" value="Del">
+                <apex:param name="delRecordId" value="{!ct.Id}" assignTo="{!delRecordId}"/>
+              </apex:commandLink>
             </apex:outputLink>
-            &nbsp;|&nbsp;
-            <apex:commandLink style="color:red" action="{!deleteRecord}">
-              Del <apex:param name="delRecordId" value="{!ct.Id}" assignTo="{!delRecordId}"/>
-            </apex:commandLink>
-            &nbsp;
           </apex:column>
           <apex:column value="{!ct.FirstName}"/>
           <apex:column value="{!ct.LastName}"/>
@@ -57,7 +61,7 @@
           <div>
             <!-- page X of Y -->
             <apex:outputText value="Page: "/>
-            <apex:outputText value="{!PageNumber} of {! CEILING(ResultSize / PageSize)}"/>
+            <apex:outputText value="{!PageNumber} of {!CEILING(ResultSize/PageSize)}"/>
           </div>
           <div>
             <apex:commandLink action="{!Previous}" value="<< Previous" rendered="{!HasPrevious}"/>

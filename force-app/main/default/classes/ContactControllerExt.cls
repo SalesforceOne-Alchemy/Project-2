@@ -18,7 +18,7 @@ public class ContactControllerExt {
       this.cont = new Contact();
     } else {
       this.cont = [
-        SELECT FirstName, LastName, Title 
+        SELECT FirstName, LastName, AccountId, Phone, Email
         FROM Contact 
         WHERE id = :recordId
       ];
