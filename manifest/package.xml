@@ -3,11 +3,15 @@
     <types>
         <members>AccountCreateEditPage</members>
         <members>AccountViewPage</members>
+        <members>LeadCreateEditPage</members>
+        <members>LeadViewPage</members>
         <name>ApexPage</name>
     </types>
     <types>
         <members>AccountExtension</members>
         <members>AccountCustomController</members>
+        <members>LeadExtension</members>
+        <members>LeadCustomController</members>
         <name>ApexClass</name>
     </types>
     <version>56.0</version>
