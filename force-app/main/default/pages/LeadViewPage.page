@@ -37,7 +37,6 @@
                         <apex:column value="{! ld.LastName }"/>
                         <apex:column value="{! ld.Company }"/>
                         <apex:column value="{! ld.Status }"/>
-                        <apex:column value="{! ld.CurrencyIsoCode }"/>
                     </apex:pageBlockTable>
                 </apex:outputPanel>
                 <apex:commandLink action="{!previous}">Previous</apex:commandLink>

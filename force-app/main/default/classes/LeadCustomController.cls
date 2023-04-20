@@ -3,7 +3,7 @@ public with sharing class LeadCustomController {
     private final Lead ld;
     public LeadCustomController() {
         if(ApexPages.currentPage().getParameters().get('id') != null){
-            ld = [SELECT Id, FirstName, LastName, Company, Status, CurrencyIsoCode FROM Lead WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
+            ld = [SELECT Id, FirstName, LastName, Company, Status FROM Lead WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
         }
         else{
             ld = new Lead();
