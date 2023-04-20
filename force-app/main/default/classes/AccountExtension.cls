@@ -36,9 +36,22 @@ public with sharing class AccountExtension {
         return stdSetController.getPageNumber();
     }
 
+    // Return the total number of pages based on the number of records selected to be displayed.
     public Integer getTotalPages(){
         Decimal totalRecords = stdSetController.getResultSize();
         return (Integer) Math.ceil(totalRecords / stdSetController.getPageSize());
     }
 
+    // Action to take when the New button is clicked
+    public PageReference newAccount(){
+        try{
+           PageReference pr = Page.AccountCreateEditPage;
+           pr.setRedirect(true);
+           return pr;
+        }
+        catch(Exception e){
+            ApexPages.addMessages(e);
+            return null;
+        }
+    }
 }
