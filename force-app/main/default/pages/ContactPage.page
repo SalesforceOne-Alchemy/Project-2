@@ -13,7 +13,7 @@
   </head>  
 
   <body>
-    <apex:image url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}"/>
+    <apex:image url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}" width="100%"/>
 
     <apex:sectionHeader title="Contact Page"/>
 
@@ -24,10 +24,14 @@
         <apex:pageBlockSection title="Contact Info">
           <apex:inputField value="{!cont.firstName}"/>
           <apex:inputField value="{!cont.lastName}"/>
-          <apex:inputField value="{!cont.title}"/>
+          <apex:inputField value="{!cont.AccountId}"/>
+          <apex:inputField value="{!cont.Phone}"/>
+          <apex:inputField value="{!cont.Email}"/>
+          <apex:inputField value="{!cont.RecordTypeId}" rendered="{!IF($Profile.Name =='System Administrator', true , false)}"/>
         </apex:pageBlockSection>
 
         <apex:pageBlockButtons location="bottom">
+          <apex:commandButton action="{!toContactListPage}" value="Cancel" immediate="true"/>
           <apex:commandButton action="{!saveOrEditRecord}" value="Save"/>
         </apex:pageBlockButtons>
       </apex:pageBlock>
