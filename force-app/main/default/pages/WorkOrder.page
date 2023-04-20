@@ -1,9 +1,9 @@
-<apex:page standardController="WorkOrder" recordSetVar="wOrders" tabStyle="WorkOrder" extensions="WorkOrderPageExtensions"
-    showHeader="false">
+<apex:page standardController="WorkOrder" recordSetVar="wOrders" tabStyle="WorkOrder" sidebar="false" extensions="WorkOrderPageExtensions">
     <header>
         <apex:stylesheet value="{!$Resource.visualforceStyle}" />
+        <apex:slds/>
     </header>
-    <apex:image url="https://cunning-fox-j481oz-dev-ed--c.trailblaze.vf.force.com/resource/1681342349000/VFBanner" />
+    <apex:image styleClass="bannerImg" url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}" />
     <apex:outputPanel id="refreshDisplay">
         <apex:form>
             <apex:pageMessages rendered="refreshDisplay"></apex:pageMessages>
@@ -24,18 +24,17 @@
                 </div>
 
                 <!-- Work Order Fields-->
-                <apex:pageBlockTable value="{!wOrders}" var="worko" id="refreshTable">
+                <apex:pageBlockTable value="{!wOrders}" var="worko" id="refreshTable" styleClass="list">
                     <!-- Del Link, Edit Link -->
                     <apex:column headerValue="Actions">
                         <apex:outputLink>
-                            <apex:outputLink value="/apex/CreateWorkOrder">
+                            <apex:outputLink styleClass="recordlist" value="/apex/c__CreateWorkOrder">
                                 <apex:outputText value="Edit" />
                                 <apex:param name="id" value="{!worko.Id}" />
                             </apex:outputLink>
 
                             <apex:outputText styleClass="delEditButtons" value="" />
-
-                            <apex:commandLink action="{!deleteWorkOrder}" value="Del" reRender="refreshTable">
+                            <apex:commandLink styleClass="recordlist" action="{!deleteWorkOrder}" value="Del" reRender="refreshTable">
                                 <apex:param name="passingRecordId" value="{!worko.Id}" assignTo="{!passingRecordId}" />
                             </apex:commandLink>
                         </apex:outputLink>
@@ -43,11 +42,11 @@
 
                     <!-- commandlink with param-->
                     <apex:column headerValue="Work Order Number">
-                        <apex:outputLink value="/apex/CreateWorkOrder">{!worko.WorkOrderNumber}
+                        <apex:outputLink styleClass="recordlist" value="/apex/c__CreateWorkOrder">{!worko.WorkOrderNumber}
                             <apex:param name="id" value="{!worko.Id}" />
                         </apex:outputLink>
                     </apex:column>
-
+                    <apex:column value="{!worko.Subject}" />
                     <!-- Related fields -->
                     <apex:column value="{!worko.AccountId}" />
                     <apex:column value="{!worko.ContactId}" />
@@ -57,37 +56,35 @@
                 </apex:pageBlockTable>
 
                 <!-- Pagination -->
-                <table id="paginationTable">
-                    <tr>
-                        <td>
-                            <!-- Page X of Y -->
-                            <apex:outputText value="Page: " />
-                            <apex:outputText value="{!PageNumber} of {! CEILING(ResultSize / PageSize)}" />
-                        </td>
-                        <td id="centerTable">
-                            <!-- Previous page -->
-                            <!--active-->
-                            <apex:commandLink action="{!Previous}" value="Previous" rendered="{!HasPrevious}" />
-                            <!--inactive-->
-                            <apex:outputText styleClass="paginationText" value="« Previous" rendered="{! NOT(HasPrevious) }" /> &nbsp;&nbsp;
-                            <!-- Next page -->
-                            <!-- active -->
-                            <apex:commandLink action="{! Next }" value="Next »" rendered="{! HasNext }" />
-                            <!-- inactive (no more pages) -->
-                            <apex:outputText styleClass="paginationText" value="Next »" rendered="{! NOT(HasNext) }" />
-                        </td>
-                        <td id="rightTable">
-                            <!-- Records per page -->
-                            <apex:outputText value="Records per Page: " />
-                            <apex:selectList value="{! PageSize }" size="1">
-                                <apex:selectOption itemValue="5" itemLabel="5" />
-                                <apex:selectOption itemValue="10" itemLabel="10" />
-                                <apex:selectOption itemValue="20" itemLabel="20" />
-                                <apex:actionSupport event="onchange" reRender="refreshDisplay" />
-                            </apex:selectList>
-                        </td>
-                    </tr>
-                </table>
+                <apex:panelGrid columns="3" styleClass="paginationTable">
+                    <apex:panelGroup layout="block">
+                        <!-- Page X of Y -->
+                        <apex:outputText value="Page: " />
+                        <apex:outputText value="{!PageNumber} of {! CEILING(ResultSize / PageSize)}" />
+                    </apex:panelGroup>
+                    <apex:panelGroup layout="block" styleClass="centerTable">
+                        <!-- Previous page -->
+                        <!--active-->
+                        <apex:commandLink action="{!Previous}" value="Previous" rendered="{!HasPrevious}" />
+                        <!--inactive-->
+                        <apex:outputText styleClass="paginationText" value="« Previous" rendered="{! NOT(HasPrevious) }" /> &nbsp;&nbsp;
+                        <!-- Next page -->
+                        <!-- active -->
+                        <apex:commandLink action="{! Next }" value="Next »" rendered="{! HasNext }" />
+                        <!-- inactive (no more pages) -->
+                        <apex:outputText styleClass="paginationText" value="Next »" rendered="{! NOT(HasNext) }" />
+                    </apex:panelGroup>
+                    <apex:panelGroup layout="block" styleClass="rightTable">
+                        <!-- Records per page -->
+                        <apex:outputText value="Records per Page: " />
+                        <apex:selectList value="{! PageSize }" size="1">
+                            <apex:selectOption itemValue="5" itemLabel="5" />
+                            <apex:selectOption itemValue="10" itemLabel="10" />
+                            <apex:selectOption itemValue="20" itemLabel="20" />
+                            <apex:actionSupport event="onchange" reRender="refreshDisplay" />
+                        </apex:selectList>
+                    </apex:panelGroup>
+                </apex:panelGrid>
 
             </apex:pageBlock>
         </apex:form>

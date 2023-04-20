@@ -57,12 +57,12 @@ public with sharing class WorkOrderPageExtensions {
 
   //DML statement methods + navigation
   public PageReference createRecord() {
-    PageReference createPage = new PageReference('/apex/CreateWorkOrder');
+    PageReference createPage = Page.CreateWorkOrder;
     createPage.setRedirect(true);
     return createPage;
   }
   public PageReference cancelRecord() {
-    PageReference cancelPage = new PageReference('/apex/WorkOrder');
+    PageReference cancelPage = Page.WorkOrder;
     cancelPage.setRedirect(true);
     return cancelPage;
   }
@@ -70,7 +70,7 @@ public with sharing class WorkOrderPageExtensions {
   public PageReference createSaveRecord() {
     try {
       upsert this.worko;
-      PageReference workoPage = new Pagereference('/apex/WorkOrder');
+      PageReference workoPage = Page.WorkOrder;
       workoPage.setRedirect(true);
       return workoPage;
     } catch (DmlException de) {
@@ -88,7 +88,7 @@ public with sharing class WorkOrderPageExtensions {
         WHERE id = :passingRecordId
       ];
       delete deleteRecord;
-      PageReference pageref = new PageReference('/apex/WorkOrder');
+      PageReference pageref = Page.WorkOrder;
       pageref.setRedirect(true);
       return pageref;
     } catch (Exception ex) {

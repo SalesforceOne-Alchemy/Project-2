@@ -1,13 +1,13 @@
-<apex:page standardController="WorkOrder" recordSetVar="workList" extensions="WorkOrderPageExtensions" showHeader="false">
+<apex:page standardController="WorkOrder" recordSetVar="workList" extensions="WorkOrderPageExtensions" tabStyle="WorkOrder" sidebar="false">
     <apex:pageMessages id="list"></apex:pageMessages>
-    <apex:form>
+    <apex:form >
         <apex:pageBlock title="Work Order Record">
-            <apex:pageBlockSection>
+            <apex:pageBlockSection >
                 <apex:inputField value="{!worko.WorkOrderNumber}" />
                 <apex:inputField id="statusSelect" value="{!worko.Status}" />
                 <apex:inputField value="{!worko.Priority}" />
-                <apex:inputField value="{!worko.AccountId}" />
-                <apex:inputField value="{!worko.ContactId}" />
+                <apex:inputField value="{!worko.AccountId}" required="true" />
+                <apex:inputField value="{!worko.ContactId}" required="true" />
                 <apex:inputField value="{!worko.AssetId}" />
                 <apex:inputField value="{!worko.CaseId}" />
                 <apex:inputField value="{!worko.EntitlementId}" />
@@ -15,7 +15,7 @@
                 <apex:inputField value="{!worko.Description}" />
 
             </apex:pageBlockSection>
-            <apex:pageBlockButtons>
+            <apex:pageBlockButtons >
                 <apex:commandButton value="Cancel" action="{!cancelRecord}" immediate="true" />
                 <apex:commandButton reRender="list" value="Save" action="{!createSaveRecord}" />
             </apex:pageBlockButtons>
