@@ -1,0 +1,30 @@
+<apex:page standardController="OrderItem" extensions="OrderItemFVPMainExtender">    
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Orders</title>
+<!-- Import the Design image -->
+        <apex:slds/>
+        <apex:image url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}"/>
+        <apex:stylesheet value="{!$Resource.visualforceStyle}" />
+    </head>
+    <apex:form id="mainform">
+        <apex:pageMessages />
+          <apex:pageBlock title="Orders">
+<!--Buttons -->
+             <apex:pageBlockButtons location="Bottom">
+              
+                <apex:commandButton action="{!cancelOrderItem}" value="Cancel"/>
+                <apex:commandButton action="{!orderItemSave}" value="Save"/>
+                
+             </apex:pageBlockButtons>
+<!--Detail -->
+             <apex:pageBlockSection columns="2">
+             <apex:outputField value="{!OrderItem.Product2Id}"/>
+             <apex:inputField value="{!OrderItem.Quantity}"/>
+             <apex:outputField value="{!OrderItem.ListPrice}"/>
+            <apex:inputField value="{!OrderItem.UnitPrice}"/>
+            </apex:pageBlockSection>
+          </apex:pageBlock>
+    </apex:form>
+</apex:page>

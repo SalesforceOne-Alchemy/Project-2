@@ -5,7 +5,8 @@
         <title>Orders</title>
 <!-- Import the Design image -->
         <apex:slds />
-        <apex:image url="https://resourceful-unicorn-tcoamw-dev-ed--c.trailblaze.vf.force.com/resource/1681341849000/banner2?" styleclass = "imageStyle"/>
+        <apex:image url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}"/>
+        <apex:stylesheet value="{!$Resource.visualforceStyle}" />
     </head>
     <body>
         
@@ -14,8 +15,8 @@
             <apex:pageBlock title="Orders">
 <!--Buttons -->
                <apex:pageBlockButtons location="Bottom">
-                <apex:outputLink value="Apex/OrderVFPMain">Back</apex:outputLink>
-                  <apex:commandButton action="{!deleteNew}" value="Delete"/>
+                
+                  <apex:commandButton action="{!cancelRecord}" value="Cancel"/>
                   <apex:commandButton action="{!saveList}" value="Save"/>
                   
                </apex:pageBlockButtons>
@@ -35,13 +36,16 @@
             <apex:outputPanel id="prolist">  
             <apex:pageBlock title="Product List"> 
             <apex:pageBlockTable value="{!Order.orderitems}" var="Product" id="list_table" styleClass="list">
-              <apex:column >
-                <apex:outputLink value="{!URLFOR($Action.OrderItem.Edit, Product.id)}">Edit</apex:outputLink>&nbsp;|&nbsp;
+              <apex:column headerValue="Action" >
+                <apex:commandLink value="Edit"  action="{!editOrderItem}">
+                  <apex:param value="{!Product.id}" name="editRec" assignTo="{!delId }"/>
+                  </apex:commandLink>
+              
                 <apex:commandLink value="Del"  action="{!deleteRecord}">
                 <apex:param value="{!Product.id}" name="deleteRec" assignTo="{!delId }"/>
                 </apex:commandLink>
           </apex:column>
-              <apex:column value="{!Product.Product2.Name}"/>
+              <apex:column headerValue="Product" value="{!Product.Product2.Name}"/>
                 <apex:column headerValue="Quantity"> 
                   <apex:outputField value="{!Product.Quantity}">
                   <apex:inlineEditSupport event="onClick"/>
@@ -54,7 +58,7 @@
                 <apex:facet name ="header">Unit Price</apex:facet>
                 </apex:outputField>
             </apex:column>
-                <apex:column value="{!Product.ListPrice}"/>
+                <apex:column headerValue="List Price" value="{!Product.ListPrice}"/>
                 <apex:column value="{!Product.TotalPrice}"/>
               </apex:pageBlockTable>
             </apex:pageBlock>

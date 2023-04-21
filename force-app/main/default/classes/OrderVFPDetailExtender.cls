@@ -2,8 +2,8 @@ public with sharing class OrderVFPDetailExtender {
     public Order ord{get;set;}
     public OrderItem ordItem{get;set;}
     public Id delId {get;set;}
-    public Id addProId {get;set;} // remove not using now
-    public Id OrderId {get;set;} //remove not using now
+    public Id addProId {get;set;}
+    
     public Boolean ShowAddProduct{get;set;}
     private ApexPages.StandardController sc;
 
@@ -19,6 +19,14 @@ public with sharing class OrderVFPDetailExtender {
             this.ord.Id = recordId;
             }
     }
+
+    // cancel button
+    public PageReference cancelRecord() {
+        PageReference cancelPage = Page.OrderVFPMain;
+        cancelPage.setRedirect(true);
+        return cancelPage;
+      }
+
 // inline delete OrderItem
     public void deleteRecord() {
         try{
@@ -30,50 +38,27 @@ public with sharing class OrderVFPDetailExtender {
        
         }
     }
+    
 // main save 
     public void saveList() {
         try{
             
             this.sc.save();
+            this.ord =(Order)sc.getRecord();
         } catch (DmlException e){
             ApexPages.addMessages(e);
        
         }
     }
-//save with redirect 
-// remove not using now
-    public PageReference saveNew(){
-        try{
-            this.sc.save();
-            PageReference ordPage = new PageReference('/apex/OrderVFPMain');
-            ordPage.setredirect(true);
-            return ordPage;
-        } catch (DmlException e){
-            ApexPages.addMessages(e);
-            return null;
-        }
-    }
-// delete with redirect
-    public PageReference deleteNew(){
-        try{
-            delete this.ord;
-            PageReference ordPage = new PageReference ('/apex/OrderVFPMain');
-            ordPage.setredirect(true);
-            return ordPage;
-        } catch (DmlException e){
-            ApexPages.addMessages(e);
-            return null;
-        }
-    }
 
 // make new OrderItem
-
     public void makeAddProduct(){
         
-        this.ordItem = new OrderItem(OrderId = this.recordId);
+        this.ordItem = new OrderItem(OrderId = this.ord.Id);
 
         ShowAddProduct = true; //show add product section
     }
+
 // add Product to OrderItem
     public void addOrderItem(){
       
@@ -88,9 +73,20 @@ public with sharing class OrderVFPDetailExtender {
            insert this.OrdItem;
             this.sc.save();
            ShowAddProduct = false; //rehide add product
+           
        } catch (DmlException e){
            ApexPages.addMessages(e);
            
         }
     }
+
+    public PageReference editOrderItem() {
+    
+        PageReference cancelPage = Page.OrderItemVFPMain;
+        cancelPage.getParameters().put('id',delId);
+        cancelPage.setRedirect(true);
+        return cancelPage;
+      }
+    
+
 }

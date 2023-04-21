@@ -1,29 +1,47 @@
 <apex:page standardController="Order" recordSetVar="Orders" 
               tabStyle="Order"
     extensions="OrderVFPmainExtend" sidebar="false">
-    
+    <header>
+     <apex:stylesheet value="{!$Resource.visualforceStyle}" />   
      
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Contacts</title>
-    
+     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </header>
     <apex:slds />
-    <apex:image url="https://resourceful-unicorn-tcoamw-dev-ed--c.trailblaze.vf.force.com/resource/1681341849000/banner2?" styleclass = "imageStyle"/>
-    <apex:form styleClass = "myFormStyle">
-        <apex:pageBlock title="Order List"> 
-            <apex:pageMessages />
-         
-                <apex:panelGrid columns="2">
-                    
-                    <apex:outputLabel value="View:"/>
-                    <apex:selectList value="{!filterId}" size="1">
-                        <apex:actionSupport event="onchange" rerender="list_table"/>
-                        <apex:selectOptions value="{!listviewoptions}"/>
-                    </apex:selectList>
-                </apex:panelGrid>
-            
+    
+    <apex:outputPanel id="refreshDisplay"> 
+    <apex:form>
+    <apex:image url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}"/>        
+    <apex:pageMessages />      
+    <apex:pageBlock > 
+     
+<!-- top of the table -->
+         <div id="container">
+            <div id="selectionStyle">
+                <h1 id="h1text">Orders</h1>
+                <apex:selectList styleClass="stlyeSheet" value="{!filterId}" size="1">
+                    <apex:actionSupport event="onchange" reRender="list_table" />
+                    <apex:selectOptions value="{!listviewoptions}" />
+                </apex:selectList>
+            </div>
+            <div id="rightButton">
+                <!-- custom button-->
+                <apex:commandButton styleClass="createButton" value="New" action="{!createRecord}"> </apex:commandButton>
+            </div>
+        </div>  
+
+<!-- table -->        
             <apex:pageBlockTable value="{!orders}" var="order" id="list_table" styleClass="list">
-                <apex:column headerValue="Order Number"> 
+                <apex:column headerValue="Action">
+                    <apex:commandLink value="Edit" action="{!editRecord}">
+                    <apex:param value="{!order.id}" name="editRec" assignTo="{!ordId }"/>
+                    </apex:commandLink>
+                   
+                    <apex:commandLink value=" Del" action="{!deleteRecord}">
+                    <apex:param value="{!order.id}" name="deleteRec" assignTo="{!ordId }"/>
+                    </apex:commandLink>
+                   
+                  </apex:column>    
+            <apex:column headerValue="Order Number"> 
                     <apex:outputLink value="Apex/OrderVFPDetail?id={!order.id}">{!order.OrderNumber}</apex:outputLink>
             </apex:column>
                 <apex:column value="{!order.AccountId}"/>
@@ -33,24 +51,37 @@
                 <apex:column value="{!order.ContractId}"/>
                 <apex:column value="{!order.Status}"/>
             </apex:pageBlockTable>
-                <apex:pageBlockButtons location="Bottom">
-                    <apex:commandLink value="First" action="{!First}"/> &nbsp;
-                    <apex:commandLink value="Next" action="{!Next}"/> &nbsp;
-                    <apex:commandLink value="Previous" action="{!Previous}"/> &nbsp;
-                    <apex:commandLink value="Last" action="{!Last}"/>
-                </apex:pageBlockButtons> 
-                <apex:panelGrid>
-                <apex:outputPanel>
-                <apex:outputText value="Records per page: "/>
-                <apex:selectList value="{!PageSize}" size="1">
-                <apex:selectOption itemValue="{!10}" itemLabel="10"/>
-                <apex:selectOption itemValue="{!20}" itemLabel="20"/>
-                </apex:selectList>
-                <apex:commandButton action="{!NULL}" value="Update"/>
-                <apex:outputLink value="Apex/OrderVFPDetail"> Add a new Order</apex:outputLink>
-                </apex:outputPanel>
+    <!-- Pagination -->
+                <apex:panelGrid columns="3" style="width: 100%;">
+                    <apex:panelGroup layout="block">
+                        <!-- Page X of Y -->
+                        <apex:outputText value="Page: " />
+                        <apex:outputText value="{!PageNumber} of {! CEILING(ResultSize / PageSize)}" />
+                    </apex:panelGroup>
+                    <apex:panelGroup layout="block" style="text-align: center;">
+                        <!-- Previous page -->
+                        <!--active-->
+                        <apex:commandLink action="{!Previous}" value="Previous" rendered="{!HasPrevious}" />
+                        <!--inactive-->
+                        <apex:outputText styleClass="paginationText" value="« Previous" rendered="{! NOT(HasPrevious) }" /> &nbsp;&nbsp;
+                        <!-- Next page -->
+                        <!-- active -->
+                        <apex:commandLink action="{! Next }" value="Next »" rendered="{! HasNext }" />
+                        <!-- inactive (no more pages) -->
+                        <apex:outputText styleClass="paginationText" value="Next »" rendered="{! NOT(HasNext) }" />
+                    </apex:panelGroup>
+                    <apex:panelGroup layout="block" style="text-align:right;">
+                        <!-- Records per page -->
+                        <apex:outputText value="Records per Page: " />
+                        <apex:selectList value="{! PageSize }" size="1">
+                            <apex:selectOption itemValue="5" itemLabel="5" />
+                            <apex:selectOption itemValue="10" itemLabel="10" />
+                            <apex:selectOption itemValue="20" itemLabel="20" />
+                            <apex:actionSupport event="onchange" reRender="refreshDisplay" />
+                        </apex:selectList>
+                    </apex:panelGroup>
                 </apex:panelGrid>
-        </apex:pageBlock>
-        
+    </apex:pageBlock>
     </apex:form>
+    </apex:outputPanel>
 </apex:page>
