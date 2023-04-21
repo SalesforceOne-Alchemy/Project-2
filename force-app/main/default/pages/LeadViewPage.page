@@ -1,6 +1,7 @@
 <apex:page standardController="Lead" recordSetVar="leads" extensions="LeadExtension">
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
     <apex:slds/>
+    <apex:image value="{!$Resource.VFBanner}"/>
         <apex:form >
             <apex:pageBlock title="Leads">
             <apex:selectList value="{!filterId}" size="1">

@@ -1,6 +1,7 @@
 <apex:page standardController="Account" recordSetVar="accounts" extensions="AccountExtension">
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
     <apex:slds/>
+    <apex:image value="{!$Resource.VFBanner}"/>
         <apex:form>
             <apex:pageBlock title="Accounts">
                 <apex:selectList value="{!filterId}" size="1">

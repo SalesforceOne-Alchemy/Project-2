@@ -1,6 +1,7 @@
 <apex:page controller="LeadCustomController">
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
     <apex:slds/>
+    <apex:image value="{!$Resource.VFBanner}"/>
     <apex:form >
         <apex:pageMessages />
         <apex:pageBlock >
