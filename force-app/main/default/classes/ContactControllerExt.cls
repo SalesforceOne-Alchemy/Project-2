@@ -43,11 +43,7 @@ public class ContactControllerExt {
 
   public Pagereference deleteRecord() {
     try {
-      Contact delRecord = [
-        SELECT LastName
-        FROM Contact
-        WHERE Id = :delRecordId
-      ];
+      Contact delRecord = new Contact(Id=delRecordId);
 
       delete delRecord;
 
