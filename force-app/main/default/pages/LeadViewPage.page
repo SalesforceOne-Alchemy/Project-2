@@ -1,3 +1,7 @@
+<!--
+    LeadViewPage.page
+    Author(s): Dorian Alexander Patterson
+-->
 <apex:page standardController="Lead" recordSetVar="leads" extensions="LeadExtension">
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
     <apex:slds/>

@@ -1,3 +1,7 @@
+<!--
+    AccountCreateEditPage.page
+    Author(s): Dorian Alexander Patterson
+-->
 <apex:page controller="AccountCustomController">
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
     <apex:slds/>

@@ -1,3 +1,7 @@
+<!--
+    AccountViewpage.page
+    Author(s): Dorian Alexander Patterson
+-->
 <apex:page standardController="Account" recordSetVar="accounts" extensions="AccountExtension">
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
     <apex:slds/>

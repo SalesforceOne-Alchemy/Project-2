@@ -1,3 +1,7 @@
+<!--
+    LeadCreateEditPage.page
+    Author(s): Dorian Alexander Patterson
+-->
 <apex:page controller="LeadCustomController">
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
     <apex:slds/>
@@ -10,8 +14,8 @@
                 <apex:inputField value="{!lead.LastName}"/>
                 <apex:inputField value="{!lead.Company}"/>
                 <apex:inputField value="{!lead.Status}"/>
-                <apex:commandLink action="{!save}" value="Save">
-                </apex:commandLink>
+                <apex:commandButton action="{!cancel}" value="Cancel" immediate="true"/>
+                <apex:commandButton action="{!save}" value="Save"/>
             </apex:pageBlockSection>
         </apex:pageBlock>
     </apex:form>
