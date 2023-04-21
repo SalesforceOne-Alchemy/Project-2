@@ -1,3 +1,7 @@
+/*
+ * AccountExtension.cls
+ * Author(s): Dorian Alexander Patterson
+ */
 public with sharing class AccountExtension {
     public Account acct {get; set;}
     public Id recordId {get; set;}
@@ -7,12 +11,6 @@ public with sharing class AccountExtension {
         this.stdSetController = stdSetController;
         if(recordId != null){
             this.acct = (Account) stdSetController.getRecord();
-        }
-    }
-
-    public AccountExtension(ApexPages.StandardController stdController){
-        if(recordId != null){
-            this.acct = (Account) stdController.getRecord();
         }
     }
 
