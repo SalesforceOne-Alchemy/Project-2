@@ -10,8 +10,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Contacts List</title>
+    <!-- custom style sheet -->
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
-    <!-- import the design system style sheet -->
+    <!-- salesforce lightning design system style sheet -->
     <apex:slds/>
   </head>
 
@@ -31,7 +32,7 @@
             </apex:selectList>
           </div>
           <div id="rightButton">
-            <apex:commandButton styleClass="createButton" value="New" action="{!toContactPage}"/>
+            <apex:commandButton value="New" action="{!toContactPage}"/>
           </div>
         </div>
 
