@@ -41,7 +41,7 @@
                   <apex:param value="{!Product.id}" name="editRec" assignTo="{!delId }"/>
                   </apex:commandLink>
               
-                <apex:commandLink value="Del"  action="{!deleteRecord}">
+                <apex:commandLink value=" Del"  action="{!deleteRecord}">
                 <apex:param value="{!Product.id}" name="deleteRec" assignTo="{!delId }"/>
                 </apex:commandLink>
           </apex:column>
