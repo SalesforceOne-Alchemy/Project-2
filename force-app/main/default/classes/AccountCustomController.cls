@@ -1,7 +1,6 @@
 public with sharing class AccountCustomController {
-    private ApexPages.StandardController sc;
-    private final Account acct;
-    private Id accountId;
+    public Account acct{get; set;}
+    public Id accountId{get;set;}
     public AccountCustomController() {
         try{
 
@@ -16,14 +15,6 @@ public with sharing class AccountCustomController {
         catch(Exception e){
             ApexPages.addMessages(e);
         }
-    }
-
-    public Account getAccount(){
-        return acct;
-    }
-
-    public Id getAccountId(){
-        return accountId;
     }
 
     public PageReference save(){
