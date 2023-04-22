@@ -1,3 +1,7 @@
+/*
+ * LeadExtension.cls
+ * Author(s): Dorian Alexander Patterson
+ */
 public with sharing class LeadExtension {
     public Lead ld {get; set;}
     public Id recordId {get; set;}

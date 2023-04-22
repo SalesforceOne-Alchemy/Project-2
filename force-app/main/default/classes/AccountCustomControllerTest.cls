@@ -1,3 +1,7 @@
+/*
+ * AccountCustomControllerTest.cls
+ * Author(s): Dorian Alexander Patterson
+ */
 @isTest
 public with sharing class AccountCustomControllerTest {
     @TestSetup
@@ -17,58 +21,70 @@ public with sharing class AccountCustomControllerTest {
 
         // No Account ID passed, therefore the Account object should be empty (no Name, no Rating, No Phone, No ParentId);
 
-        Assert.isNotNull(controller.getAccount());
-        Assert.areEqual(null, controller.getAccount().Name);
-        Assert.areEqual(null, controller.getAccount().Rating);
-        Assert.areEqual(null, controller.getAccount().Phone);
-        Assert.areEqual(null, controller.getAccount().ParentId);
+        Assert.isNotNull(controller.account);
+        Assert.areEqual(null, controller.account.Name);
+        Assert.areEqual(null, controller.account.Rating);
+        Assert.areEqual(null, controller.account.Phone);
+        Assert.areEqual(null, controller.account.ParentId);
 
         // Record Id passed
-        String recordId = (String) [SELECT Id FROM Account WHERE Name = 'Account Name' LIMIT 1].Id;
+        String accountId = (String) [SELECT Id FROM Account WHERE Name = 'Account Name' LIMIT 1].Id;
 
-        ApexPages.currentPage().getParameters().put('id', recordId);
+        ApexPages.currentPage().getParameters().put('id', accountId);
 
         controller = new AccountCustomController();
 
-        Assert.isNotNull(controller.getAccount());
-        Assert.areEqual('Account Name', controller.getAccount().Name);
-        Assert.areEqual('Hot', controller.getAccount().Rating);
-        Assert.areEqual('7061234567', controller.getAccount().Phone);
-        Assert.areEqual(null, controller.getAccount().ParentId);
+        Assert.isNotNull(controller.account);
+        Assert.areEqual('Account Name', controller.account.Name);
+        Assert.areEqual('Hot', controller.account.Rating);
+        Assert.areEqual('7061234567', controller.account.Phone);
+        Assert.areEqual(null, controller.account.ParentId);
     }
 
-    // Id passed is invalid
-    public static testMethod void testConstructorNegative(){
-        PageReferene pr = Page.AccountCreateEditPage;
-        Test.setCurrentPage(pr);
-        ApexPages.currentPage().getParameters().put('id', 'invalidid');
-        AccountCustomController controller = new AccountCustomController();
+    public static testMethod void testCancelPositive(){
+       PageReference pr = Page.AccountCreateEditPage;
+       Test.setCurrentpage(pr);
+       AccountCustomController controller = new AccountCustomController();
+       String nextPage = controller.cancel().getUrl();
+
+       Assert.areEqual('/apex/accountviewpage', nextPage);
     }
+    // TODO: Write negative cancel test
 
-    public static testMethod void testGetAccountPositive(){
-
-    }
-
-    public static testMethod void testGetAccountNegative(){
-
-    }
-
-    public static testMethod void testGetAccountIdPositive(){
-
-    }
-
-    public static testMethod void testGetAccountIdNegative(){
-
-    }
-
+    // Postive test for upserting accounts.
     public static testMethod void testSavePositive(){
+        Account testAccount = [ SELECT Id, Name
+                                FROM Account
+                                WHERE Name = 'Account Name'];
+        String insertAccountName = 'Account Name for Inserted Account';
+        PageReference pr = Page.AccountCreateEditPage;
+        ApexPages.currentPage().getParameters().put('id', testAccount.Id);
+        Test.setCurrentPage(pr);
+        AccountCustomController controller = new AccountCustomController();
+        controller.account.Name = insertAccountName;
+        controller.save();
 
+        Account insertedAccount = [ SELECT Id, Name
+                                    FROM Account
+                                    WHERE Name = :insertAccountName LIMIT 1];
+        Assert.isNotNull(insertedAccount);
+        Assert.areEqual(testAccount.Id, insertedAccount.Id);
+        Assert.areEqual(insertAccountName, insertedAccount.Name);
     }
 
+    // TODO: negative save test
     public static testMethod void testSaveNegative(){
+        PageReference pr = Page.AccountCreateEditPage;
+        Test.setCurrentPage(pr);
+        AccountCustomController controller = new AccountCustomController();
+        controller.account = null;
 
+        PageReference negativePr = controller.save();
+
+        Assert.isNull(negativePr);
     }
 
+    // TODO: Restricted user test
     public static testMethod void testRestrictedUser(){
 
     }

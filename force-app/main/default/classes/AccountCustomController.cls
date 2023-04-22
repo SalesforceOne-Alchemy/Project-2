@@ -1,5 +1,9 @@
+/*
+ * AccountCustomController.cls
+ * Author(s): Dorian Alexander Patterson
+ */
 public with sharing class AccountCustomController {
-    public Account account{get; set;}
+public Account account{get; set;}
     public Id accountId{get;set;}
     public AccountCustomController() {
         try{

@@ -1,22 +1,29 @@
+/*
+ * LeadCustomController.cls
+ * Author(s): Dorian Alexander Patterson
+ */
 public with sharing class LeadCustomController {
-    private ApexPages.StandardController sc;
-    private final Lead ld;
+    public Lead lead{get;set;}
+    public Id leadId {get; set;}
     public LeadCustomController() {
         if(ApexPages.currentPage().getParameters().get('id') != null){
-            ld = [SELECT Id, FirstName, LastName, Company, Status FROM Lead WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
+            leadId = ApexPages.currentPage().getParameters().get('id');
+            lead = [SELECT Id, FirstName, LastName, Company, Status FROM Lead WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
         }
         else{
-            ld = new Lead();
+            lead = new Lead();
         }
     }
 
-    public Lead getLead(){
-        return ld;
+    public PageReference cancel(){
+        PageReference pr = Page.LeadViewPage;
+        pr.setRedirect(true);
+        return pr;
     }
 
     public PageReference save(){
         try{
-            upsert ld;
+            upsert lead;
             return Page.LeadViewPage;
         }
         catch(Exception e){

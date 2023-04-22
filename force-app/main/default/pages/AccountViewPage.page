@@ -30,7 +30,7 @@
                         <apex:column value="{! acc.Phone }"/>
                         <apex:column value="{! acc.ParentId }"/>
                     </apex:pageBlockTable>
-                    <apex:outputText value="Page {!pageNumber} of {!totalPages}"/>
+                    <apex:outputText value="Page {!PageNumber} of {!CEILING(ResultSize / PageSize)}"/>
                     <apex:commandLink action="{!previous}">Previous</apex:commandLink>
                     <apex:commandLink action="{!next}">Next</apex:commandLink>
                     <apex:selectList value="{!pageSize}" size="1">
