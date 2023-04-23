@@ -53,12 +53,13 @@ public with sharing class AccountCustomControllerTest {
 
     // Postive test for upserting accounts.
     public static testMethod void testSavePositive(){
+        // Test insert
+        // Required: Name
         Account testAccount = [ SELECT Id, Name
                                 FROM Account
                                 WHERE Name = 'Account Name'];
         String insertAccountName = 'Account Name for Inserted Account';
         PageReference pr = Page.AccountCreateEditPage;
-        ApexPages.currentPage().getParameters().put('id', testAccount.Id);
         Test.setCurrentPage(pr);
         AccountCustomController controller = new AccountCustomController();
         controller.account.Name = insertAccountName;
@@ -68,8 +69,22 @@ public with sharing class AccountCustomControllerTest {
                                     FROM Account
                                     WHERE Name = :insertAccountName LIMIT 1];
         Assert.isNotNull(insertedAccount);
-        Assert.areEqual(testAccount.Id, insertedAccount.Id);
-        Assert.areEqual(insertAccountName, insertedAccount.Name);
+        Assert.areNotEqual(testAccount.Id, insertedAccount.Id);
+
+        // Test update
+        String updateAccountName = 'Pokemon Company';
+        pr = Page.AccountCreateEditPage;
+        Test.setCurrentPage(pr);
+        ApexPages.currentPage().getParameters().put('id', testAccount.Id);
+        controller = new AccountCustomController();
+        controller.account.Name = updateAccountName;
+        controller.save();
+
+        Account updatedAccount = [SELECT Id FROM Account WHERE Name = :updateAccountName LIMIT 1];
+
+        Assert.isNotNull(insertedAccount);
+        Assert.areEqual(testAccount.Id, updatedAccount.Id);
+
     }
 
     // TODO: negative save test

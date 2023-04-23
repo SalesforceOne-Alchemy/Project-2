@@ -54,26 +54,36 @@ public with sharing class LeadCustomControllerTest {
 
     // Postive test for upserting leads.
     public static testMethod void testSavePositive(){
+        // Test insert
+        // Last name and Company name is required.
         Lead testLead = [ SELECT Id, FirstName, LastName, Company, Status
                                 FROM Lead
                                 WHERE FirstName = 'Dorian'];
-        String insertLeadFirstName = 'Alex';
+        String insertLeadLastName = 'Pat';
+        String insertLeadCompany = 'Google';
         PageReference pr = Page.LeadCreateEditPage;
         Test.setCurrentPage(pr);
         LeadCustomController controller = new LeadCustomController();
-        controller.lead.FirstName = insertLeadFirstName;
+        controller.lead.LastName = insertLeadLastName;
+        controller.lead.Company = insertLeadCompany;
         controller.save();
 
-        Lead insertedLead = [SELECT FirstName FROM Lead WHERE FirstName = :insertLeadFirstName];
+        Lead insertedLead = [SELECT Id FROM Lead WHERE LastName = :insertLeadLastName];
         Assert.isNotNull(insertedLead);
         Assert.areNotEqual(testLead.Id, insertedLead.Id);
 
         // Test Update
+        pr = Page.LeadCreateEditPage;
+        Test.setCurrentPage(pr);
         String updateLeadFirstName = 'Alice';
         ApexPages.currentPage().getParameters().put('id', testLead.Id);
         controller = new LeadCustomController();
-        controller.lead.FirstName = updateLeadFirstName()
+        controller.lead.FirstName = updateLeadFirstName;
+        controller.save();
 
+        Lead updatedLead = [SELECT Id FROM Lead WHERE FirstName = :updateLeadFirstName];
+        Assert.isNotNull(updatedLead);
+        Assert.areEqual(testLead.Id, updatedLead.Id);
     }
 
     // TODO: negative save test
