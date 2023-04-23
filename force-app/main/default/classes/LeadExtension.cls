@@ -14,12 +14,6 @@ public with sharing class LeadExtension {
         }
     }
 
-    public LeadExtension(ApexPages.StandardController stdController){
-        if(recordId != null){
-            this.ld = (Lead) stdController.getRecord();
-        }
-    }
-
     // Deletes one account record. Used on list views.
     public PageReference deleteLead(){
         try{
@@ -33,15 +27,6 @@ public with sharing class LeadExtension {
             ApexPages.addMessages(e);
             return null;
         }
-    }
-
-    public Integer getPageNubmer(){
-        return stdSetController.getPageNumber();
-    }
-
-    public Integer getTotalPages(){
-        Decimal totalRecords = stdSetController.getResultSize();
-        return (Integer) Math.ceil (totalRecords / stdSetController.getPageSize());
     }
 
     public PageReference newLead(){
