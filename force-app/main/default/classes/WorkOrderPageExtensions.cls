@@ -1,3 +1,13 @@
+/*
+    Created and Tested by: Jancarlo Sevilla
+
+    Testing Item: WorkOrderPageExtensions
+    Project Name: Revature's Project 2 FBC
+    Company Name: Revature 
+    Use Case - Work Order Visual Force Page
+
+
+*/
 public with sharing class WorkOrderPageExtensions {
   public WorkOrder worko { get; set; }
   public String passingRecordId { get; set; }
@@ -17,6 +27,7 @@ public with sharing class WorkOrderPageExtensions {
           AssetId,
           CaseId,
           EntitlementId,
+          PostalCode,
           Subject,
           Description
         FROM WorkOrder
@@ -52,7 +63,7 @@ public with sharing class WorkOrderPageExtensions {
         return returnVar;
       }
     }
-    return '';
+    return '--None--';
   }
 
   //DML statement methods + navigation
@@ -80,14 +91,9 @@ public with sharing class WorkOrderPageExtensions {
   }
 
   public PageReference deleteWorkOrder() {
-    try {
-      WorkOrder deleteRecord = new WorkOrder();
-      deleteRecord = [
-        SELECT Id, WorkOrderNumber
-        FROM WorkOrder
-        WHERE id = :passingRecordId
-      ];
-      delete deleteRecord;
+    try {     
+      WorkOrder workDelete = new WorkOrder(Id = passingRecordId);
+      delete workDelete;
       PageReference pageref = Page.WorkOrder;
       pageref.setRedirect(true);
       return pageref;
