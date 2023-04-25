@@ -1,0 +1,66 @@
+<!--========================================================================-->
+<!-- Name: CHRISTOPHER BOAMAH MENSAH 
+           Revature LLC                                                     -->
+
+<!-- Purpose: This page is a home page that has functionality to navigate 
+              to other visualforce pages.                                   -->
+<!--========================================================================-->
+<apex:page>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Home</title>
+    <!-- custom style sheet -->
+    <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
+    <!-- salesforce lightning design system style sheet -->
+    <apex:slds/>
+  </head>
+
+  <body>
+    <apex:image url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}" width="100%"/>
+  
+    <div id="nav-bar">
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/Home">Home</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/LeadViewPage">Leads</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/AccountViewPage">Accounts</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/ContactListPage">Contacts</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/OrderVFPmain">Orders</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/WorkOrder">Work Orders</apex:outputLink>
+      </div>
+    </div>
+
+    <div id="about-div">
+      <h1 class="slds-text-heading_medium">About Us</h1>
+      <p>
+        <ul class="slds-list_dotted">
+          <li class="slds-item">For 20+ years, FBC has been a major supplying of traditional office products, furniture, 
+              and technology infrastructure such as servers and desktops </li>
+          <li class="slds-item">Our experience has enabled our customers thrive and succeed in an ever-changing market</li>
+          <li class="slds-item">
+            We operate three businesses: 
+            <ul class="slds-list_dotted">
+              <li class="slds-item">Cooporate: these include major cooporations and businesses</li>
+              <li class="slds-item">Education: these include most colleges and K-12 schools</li>
+              <li class="slds-item">Government: most governments that are alies of the United States have access to 
+                  our exclusive technology infrastructure </li>
+            </ul>
+          </li>
+          <li class="slds-item">We employ over 20,000 associates</li>
+          <li class="slds-item">We are headquartered in Reston, VA</li>
+          <li class="slds-item">We have a 10-year plan to reduce emmissions and waste</li>
+        </ul>
+      </p>
+    </div>    
+  </body>
+</apex:page>

@@ -18,6 +18,27 @@
 
   <body>
     <apex:image url="{!URLFOR($Resource.FBCBanner, '/FBCbanner.png')}" width="100%"/>
+
+    <div id="nav-bar">
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/Home">Home</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/LeadViewPage">Leads</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/AccountViewPage">Accounts</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/ContactListPage">Contacts</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/OrderVFPmain">Orders</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/WorkOrder">Work Orders</apex:outputLink>
+      </div>
+    </div>
     
     <apex:pageMessages/>
 
