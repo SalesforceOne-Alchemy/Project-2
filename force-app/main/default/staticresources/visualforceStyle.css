@@ -1,4 +1,4 @@
- #selectionStyle {
+#selectionStyle {
    display: flex;
    flex-direction: column;
 }
@@ -13,22 +13,22 @@
 .stlyeSheet {
    margin-bottom: 10px;
 }
-#rightButton{
+#rightButton {
    display: flex;
    justify-content: right;
    flex-grow: 3;
 }
-.createButton{
+.createButton {
    line-height: 1.5rem;
    width: 2.5rem;
 }
-.delEditButtons{
+.delEditButtons {
    padding: 0px 5px 0px 5px;
 }
-.paginationText{
+.paginationText {
    color: #ccc;
 }
-#paginationTable{
+#paginationTable {
    width: 100%;
 }
 #centerTable {
@@ -37,23 +37,33 @@
 #rightTable {
    text-align: right;
 }
-.bannerImg{
+.bannerImg {
    width: 100%;
 }
-.recordlist:link{
+.recordlist:link {
    text-decoration: none;
    color: rgb(1, 118, 211);
 }
 .recordlist:visited {
    text-decoration: none;
 }
-.recordlist:hover{
+.recordlist:hover {
    text-decoration: none;
    color: rgb(1, 68, 134);
 }
-.recordlist:active{
+.recordlist:active {
    text-decoration: none;
 }
-.edit-button{
+.edit-button {
    margin-right: 0.5rem;
+}
+#nav-bar {
+   display: flex;
+   width: 50%;
+   justify-content: space-between;
+   margin: 10px;
+}
+#about-div {
+   width: 50%;
+   margin: 10px;
 }

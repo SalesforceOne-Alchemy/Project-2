@@ -4,15 +4,41 @@
 -->
 <apex:page standardController="Lead" recordSetVar="leads" extensions="LeadExtension">
     <apex:stylesheet value="{!$Resource.visualforceStyle}"/>
-    <apex:slds/>
+    <apex:slds />
     <apex:image value="{!$Resource.VFBanner}"/>
+    <div id="nav-bar">
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/Home">Home</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/LeadViewPage">Leads</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/AccountViewPage">Accounts</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/ContactListPage">Contacts</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/OrderVFPmain">Orders</apex:outputLink>
+      </div>
+      <div>
+        <apex:outputLink styleClass="nav-link" value="/apex/WorkOrder">Work Orders</apex:outputLink>
+      </div>
+    </div>
         <apex:form >
             <apex:pageBlock title="Leads">
-            <apex:selectList value="{!filterId}" size="1">
-                <apex:actionSupport event="onchange" reRender="list-view"/>
-                <apex:selectOptions value="{!listviewoptions}"/>
-            </apex:selectList>
-            <apex:commandButton value="New" action="{!newLead}"/>
+            <div id="container">
+                <div id="selectionStyle">
+                    <apex:selectList value="{!filterId}" size="1">
+                        <apex:actionSupport event="onchange" reRender="list-view"/>
+                        <apex:selectOptions value="{!listviewoptions}"/>
+                    </apex:selectList>
+                </div>
+                <div id="rightButton">
+            		<apex:commandButton value="New" action="{!newLead}"/>
+                </div>
+            </div>
             <apex:outputPanel id="list-view">
                 <apex:pageBlockTable value="{! leads }" var="ld">
                     <apex:column headerValue="Actions">
@@ -30,15 +56,24 @@
                     <apex:column value="{! ld.Company }"/>
                     <apex:column value="{! ld.Status }"/>
                 </apex:pageBlockTable>
-                <apex:outputText value="Page {!PageNumber} of {!CEILING(ResultSize / PageSize)}"/>
-                <apex:commandLink action="{!previous}">Previous</apex:commandLink>
-                <apex:commandLink action="{!next}">Next</apex:commandLink>
-                <apex:selectList value="{!pageSize}" size = "1">
-                    <apex:actionSupport event="onchange" reRender="list-view"/>
-                    <apex:selectOption itemLabel="5" itemValue="5"/>
-                    <apex:selectOption itemLabel="10" itemValue="10"/>
-                    <apex:selectOption itemLabel="20" itemValue="20"/>
-                </apex:selectList>
+                <div style="display:flex; flex-direction:row; justify-content:space-between">
+                	<div>
+                    	<apex:outputText value="Page {!PageNumber} of {!CEILING(ResultSize / PageSize)}"/>
+                	</div>
+                  	<div>
+                		<apex:commandLink action="{!previous}">Previous</apex:commandLink>
+                        &nbsp;&nbsp;
+                		<apex:commandLink action="{!next}">Next</apex:commandLink>        
+                    </div>  
+                	<div>
+                   		<apex:selectList value="{!pageSize}" size="1">
+                        	<apex:actionSupport event="onchange" reRender="list-view"/>
+                        	<apex:selectOption itemLabel="5" itemValue="5"/>
+                        	<apex:selectOption itemLabel="10" itemValue="10"/>
+                        	<apex:selectOption itemLabel="20" itemValue="20"/>
+                    	</apex:selectList>    
+                    </div>
+                </div>
             </apex:outputPanel>
         </apex:pageBlock>
     </apex:form>
